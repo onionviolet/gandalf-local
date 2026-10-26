@@ -2,7 +2,7 @@
 
 A small prompt-injection game for outreach, powered by **Ollama on your own computer**. Ask a wizard questions, discover a hidden word, and work through seven defenses. No student signups, cloud API keys, or JavaScript build step.
 
-This is an **unofficial recreation for learning and outreach**, inspired by [Lakera’s original Gandalf](https://gandalf.lakera.ai/). It uses original code and artwork, new per-session words, and the [published defense progression](https://lakeraai.medium.com/who-is-gandalf-2b93b457ab48). It is not an archived copy, an exact behavioral replica, or affiliated with Lakera.
+This is an **unofficial recreation for learning and outreach**, inspired by [Lakera’s original Gandalf](https://gandalf.lakera.ai/). It uses a local Ollama backend, new per-session words, and the [published defense progression](https://lakeraai.medium.com/who-is-gandalf-2b93b457ab48). The interface now follows the original centered layout and displays recovered original wizard artwork. A separate historical frontend archive is included for reference. This is not an exact behavioral replica and is not affiliated with Lakera. See [third-party materials and replacement instructions](THIRD_PARTY.md).
 
 ![The local password game](docs/screenshot.png)
 
@@ -44,7 +44,7 @@ OLLAMA_MODEL=qwen3.8:27b npm start
 
 Like the original, levels 3–6 isolate different defenses rather than accumulating every earlier check. The final level combines them. They introduce increasingly involved ideas; the numeric order does not guarantee increasing difficulty for every model or prompt.
 
-Every question is a fresh model interaction. Conversation bubbles are a notebook for the player, not a multi-turn model memory. Guesses ignore case and surrounding spaces. Earlier unlocked levels remain available for comparison. A successful guess reveals a short explanation of the defense.
+Every question is a fresh model interaction. The page shows the most recent answer. Prior questions are not fed back into the model. Guesses ignore case and surrounding spaces. Earlier unlocked levels remain available for comparison. A successful guess reveals a short explanation of the defense.
 
 ## Running an outreach session
 
@@ -87,6 +87,6 @@ Tests use fake model responses to check actual application boundaries: guard ord
 
 ## Source and license
 
-Node HTTP server, browser HTML/CSS/JavaScript, and an original SVG wizard. No third-party runtime dependencies. New implementation and artwork are MIT licensed. Model weights have their own licenses. The Gandalf name and references to Lakera do not grant rights to Lakera’s branding, assets, or service. No original game code, art, or backend has been copied.
+Node HTTP server and browser HTML/CSS/JavaScript, with no third-party runtime dependencies. The independently written implementation and our fallback SVG are MIT licensed. Recovered Lakera artwork and archived frontend files are third-party materials excluded from that grant; see [THIRD_PARTY.md](THIRD_PARTY.md). Model weights have their own licenses. The archived frontend is not executed by the local application.
 
 Mechanic reference: Lakera, *You shall not pass: the spells behind Gandalf* (June 8, 2023). Ollama integration uses its documented [`/api/chat`](https://docs.ollama.com/api/chat) and local model listing endpoints.

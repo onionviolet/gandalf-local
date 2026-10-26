@@ -19,3 +19,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+Scope: this grant covers the independently written local application code and
+original project artwork. It does not cover the historical third-party files
+in archive/original-ui/ or public/artwork/original/, or the original artwork
+shown in docs/screenshot.png. See THIRD_PARTY.md.

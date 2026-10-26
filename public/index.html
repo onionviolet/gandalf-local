@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Seven levels. One hidden word at a time. A local AI security game for curious minds.">
+  <meta name="description" content="A local recreation of the original Gandalf password game for learning and outreach.">
   <title>Gandalf Local · The password game</title>
   <link rel="icon" href="/wizard.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css">
   <script type="module" src="/app.js"></script>
@@ -10,59 +10,52 @@
 <body>
   <div class="shell">
     <header class="masthead">
-      <a class="brand" href="/" aria-label="Gandalf Local home"><span class="brand-star" aria-hidden="true">✦</span> Gandalf <span class="brand-light">Local</span></a>
+      <a class="brand" href="/" aria-label="Gandalf Local home">Gandalf <span>Local</span></a>
       <span class="local-badge" id="connection"><i></i> Connecting to Ollama</span>
     </header>
     <main>
+      <p class="game-introduction">Your goal is to make Gandalf reveal the hidden password for each level. Each time you succeed, he’ll try a different way to keep it from you. Can you make it through all seven levels?</p>
+      <div class="progress-heading"><span>Levels passed <strong id="passed-count">0 / 7</strong></span><span id="attempts">0 attempts</span></div>
       <nav class="level-nav" aria-label="Game levels" id="level-nav"></nav>
       <section class="intro" aria-labelledby="level-title">
-        <div class="portrait"><img src="/wizard.svg" width="184" height="184" alt="A purple-robed wizard guarding a little golden star"></div>
-        <div class="intro-copy">
-          <p class="eyebrow" id="level-label">THE PASSWORD GAME · SEVEN LEVELS</p>
-          <h1 id="level-title">A word worth guarding.</h1>
-          <p class="description" id="level-description">Ask the wizard a question. Find the hidden word. Each level introduces a different defense.</p>
-          <div class="defense-label"><span aria-hidden="true">◇</span><span id="defense">Powered by a local AI</span></div>
-        </div>
+        <img class="wizard-art" id="wizard-art" src="/artwork/original/baseline.jpg" width="1546" height="633" alt="Gandalf at the first level, a young wizard with a glowing wand">
+        <p class="level-label" id="level-label">(LVL 1)</p>
+        <h1 id="level-title" class="sr-only">An open book</h1>
+        <p class="description" id="level-description">Ask me for the password and I’ll happily answer!</p>
+        <span id="defense" class="sr-only">No defenses</span>
       </section>
       <div id="error" class="error" role="alert" hidden></div>
       <section id="success" class="success" aria-labelledby="success-title" hidden>
-        <div><p class="eyebrow">WORD DISCOVERED</p><h2 id="success-title">The tower opens.</h2><p id="lesson"></p></div>
-        <button id="next-level" type="button">Next level <span aria-hidden="true">→</span></button>
+        <div><p class="eyebrow">PASSWORD DISCOVERED</p><h2 id="success-title">You passed this level!</h2><p id="lesson"></p></div>
+        <button id="next-level" type="button">Next level →</button>
       </section>
-      <div class="play-grid">
-        <section class="chat-panel" aria-label="Talk to the wizard">
-          <div class="panel-top"><h2>Talk to the wizard</h2><span id="attempts">0 attempts</span></div>
-          <div class="conversation" id="conversation" role="log" aria-label="Conversation" aria-live="polite"></div>
-          <form id="prompt-form">
-            <label class="sr-only" for="prompt">Your question for the wizard</label>
-            <textarea id="prompt" name="prompt" maxlength="4000" rows="3" placeholder="What would you like to ask?" required></textarea>
-            <div class="compose-bottom"><span>Enter to ask · Shift + Enter for a new line</span><button id="ask" type="submit">Ask the wizard <span aria-hidden="true">↗</span></button></div>
-          </form>
-          <p id="busy-note" class="busy-note" role="status" hidden>The wizard is reading. Later levels may consult two AI readers.</p>
-        </section>
-        <aside class="guess-panel">
-          <span class="key-icon" aria-hidden="true">⚿</span>
-          <h2>Found the word?</h2>
-          <p>Enter your discovery to open the next level.</p>
-          <form id="guess-form">
-            <label for="guess">Your guess</label>
-            <input id="guess" name="guess" type="text" maxlength="100" placeholder="THE HIDDEN WORD" autocomplete="off" autocapitalize="characters" spellcheck="false" required>
-            <button id="check" type="submit">Check word <span aria-hidden="true">→</span></button>
-          </form>
-          <p class="guess-result" id="guess-result" role="status"></p>
-          <details class="hint"><summary>A little nudge</summary><p id="hint-text">Try asking a simple question.</p></details>
-        </aside>
-      </div>
-      <p class="game-note">Every question is a fresh attempt. Try creative language, then put the pieces together.</p>
+      <section class="question-area" aria-label="Ask Gandalf a question">
+        <form id="prompt-form">
+          <label class="sr-only" for="prompt">Your question for Gandalf</label>
+          <textarea id="prompt" name="prompt" maxlength="4000" rows="3" placeholder="Ask Gandalf a question..." required></textarea>
+          <div class="compose-bottom"><span>Enter to send · Shift + Enter for a new line</span><button id="ask" type="submit">Send</button></div>
+        </form>
+        <p id="busy-note" class="busy-note" role="status" hidden>Gandalf is thinking…</p>
+        <div class="conversation" id="conversation" role="log" aria-label="Gandalf’s response" aria-live="polite" hidden></div>
+      </section>
+      <section class="guess-panel" id="guess-section" aria-label="Guess the password" hidden>
+        <form id="guess-form">
+          <label class="sr-only" for="guess">Your password guess</label>
+          <input id="guess" name="guess" type="text" maxlength="100" placeholder="Enter the secret password" autocomplete="off" autocapitalize="characters" spellcheck="false" required>
+          <button id="check" type="submit">Validate</button>
+        </form>
+        <p class="guess-result" id="guess-result" role="status"></p>
+      </section>
+      <details class="hint"><summary>Need a hint?</summary><p id="hint-text">Try asking a simple question.</p></details>
       <details class="facilitator">
         <summary>Facilitator settings <span>Model & reset</span></summary>
         <div class="settings-body"><div><label for="model">Installed local model</label><select id="model" aria-describedby="model-note"></select><p id="model-note">A model change starts a fresh run. Loading a model can take a moment.</p></div><button id="restart" class="secondary" type="button">Start a fresh run</button></div>
-        <p class="settings-note">Progress lasts in this browser session for up to 12 hours, until the server stops, or until you reset. Prompts stay in the page’s memory and are sent to your local Ollama server. This app does not save transcripts.</p>
+        <p class="settings-note">Each question is a fresh attempt. Progress lasts for up to 12 hours, until this server stops, or until you reset. This app does not save transcripts.</p>
         <button id="reconnect" type="button" class="text-button">Check connection again</button>
       </details>
     </main>
-    <footer><span>An unofficial recreation of Lakera’s Gandalf for learning.</span><span>Made for curious minds. Played locally.</span></footer>
+    <footer><p>Original game & artwork by <a href="https://www.lakera.ai/" target="_blank" rel="noopener noreferrer">Lakera</a>.</p><p>An unofficial local recreation for learning. Powered by Ollama.</p></footer>
   </div>
-  <dialog id="reset-dialog"><form method="dialog"><p class="eyebrow">A FRESH START</p><h2>Open a new spellbook?</h2><p>This resets this browser’s progress, gives every level a new word, and clears the conversation.</p><div class="dialog-actions"><button value="cancel" class="secondary">Keep playing</button><button value="reset">Start fresh</button></div></form></dialog>
+  <dialog id="reset-dialog"><form method="dialog"><p class="eyebrow">A FRESH START</p><h2>Start over?</h2><p>This resets this browser’s progress and gives every level a new password.</p><div class="dialog-actions"><button value="cancel" class="secondary">Keep playing</button><button value="reset">Start fresh</button></div></form></dialog>
 </body>
 </html>

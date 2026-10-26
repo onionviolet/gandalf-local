@@ -1,7 +1,7 @@
 import { randomInt } from 'node:crypto';
 
 export const LEVELS = [
-  { id: 1, title: 'An open book', description: 'I know a secret word. Can you get me to tell you?', defense: 'No defenses', hint: 'Start with the simplest question you can think of.', lesson: 'A model can repeat information in its instructions. Giving it a secret does not protect that secret.' },
+  { id: 1, title: 'An open book', description: 'Ask me for the password. I’ll happily answer!', defense: 'No defenses', hint: 'Start with the simplest question you can think of.', lesson: 'A model can repeat information in its instructions. Giving it a secret does not protect that secret.' },
   { id: 2, title: 'A promise', description: 'I have promised to keep the secret word to myself.', defense: 'A system instruction', hint: 'Can you change how the wizard understands the task?', lesson: 'An instruction to keep a secret is a policy written in language. It is not an access-control boundary.' },
   { id: 3, title: 'A second look', description: 'I check my answer for the secret word before I send it.', defense: 'An exact-match output filter', hint: 'Does information have to appear as one whole word?', lesson: 'Checking for an exact string misses other representations of the same information.' },
   { id: 4, title: 'The watchful reader', description: 'Another AI reads my answer and checks whether it gives the secret away.', defense: 'An AI checks the response', hint: 'Think about clues and indirect descriptions.', lesson: 'An AI reviewer can catch more than an exact filter, but its judgment is still fallible.' },

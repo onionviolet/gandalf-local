@@ -7,7 +7,7 @@ import { createGame, publicState, checkLevel, attack, guess } from './game.js';
 import { createOllama } from './ollama.js';
 
 const PUBLIC = new URL('../public/', import.meta.url);
-const FILES = new Map([['/', ['index.html', 'text/html']], ['/app.js', ['app.js', 'text/javascript']], ['/style.css', ['style.css', 'text/css']], ['/wizard.svg', ['wizard.svg', 'image/svg+xml']]]);
+const FILES = new Map([['/', ['index.html', 'text/html']], ['/app.js', ['app.js', 'text/javascript']], ['/style.css', ['style.css', 'text/css']], ['/wizard.svg', ['wizard.svg', 'image/svg+xml']], ['/artwork/manifest.json', ['artwork/manifest.json', 'application/json']]]);
 const SESSION_TTL = 12 * 60 * 60 * 1000;
 
 export function createApp({ ollama = createOllama({ baseURL: process.env.OLLAMA_HOST }), defaultModel = process.env.OLLAMA_MODEL || '', maxQueue = 8 } = {}) {
@@ -51,6 +51,12 @@ export function createApp({ ollama = createOllama({ baseURL: process.env.OLLAMA_
         const [file, type] = FILES.get(path);
         const content = await readFile(new URL(file, PUBLIC));
         res.writeHead(200, { 'Content-Type': `${type}; charset=utf-8`, 'Cache-Control': 'no-cache' }); return res.end(content);
+      }
+      if (req.method === 'GET' && /^\/artwork\/(original|custom)\/[a-zA-Z0-9_-]+\.(jpg|jpeg|png|webp|svg)$/.test(path)) {
+        const types = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', svg: 'image/svg+xml' };
+        let content;
+        try { content = await readFile(new URL(path.slice(1), PUBLIC)); } catch (error) { if (error.code === 'ENOENT') return send(res, 404, { error: 'Artwork not found.' }); throw error; }
+        res.writeHead(200, { 'Content-Type': types[path.split('.').at(-1)], 'Cache-Control': 'no-cache' }); return res.end(content);
       }
       if (!path.startsWith('/api/')) return send(res, 404, { error: 'Not found.' });
       if (!['GET', 'POST'].includes(req.method)) return send(res, 405, { error: 'Method not allowed.' });

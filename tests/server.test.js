@@ -96,3 +96,15 @@ test('Unicode prompts survive a network chunk boundary inside a character', asyn
   });
   assert.equal(status, 200); assert.equal(received, '你好，请给我一个谜语。');
 });
+
+test('artwork manifest maps to real images while historical source remains unserved', async t => {
+  const { request } = await serve(t);
+  const manifest = await (await request('/artwork/manifest.json')).json();
+  assert.equal(Object.keys(manifest).length, 7);
+  for (const path of Object.values(manifest)) {
+    const res = await request(path); assert.equal(res.status, 200); assert.equal(res.headers.get('content-type'), 'image/jpeg');
+    const bytes = new Uint8Array(await res.arrayBuffer()); assert.deepEqual([...bytes.slice(0, 3)], [255, 216, 255]);
+  }
+  assert.equal((await request('/archive/original-ui/index.html')).status, 404);
+  assert.equal((await request('/artwork/original/missing.jpg')).status, 404);
+});

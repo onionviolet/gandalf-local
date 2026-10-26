@@ -36,7 +36,7 @@ A guard error, timeout, or empty model response is a technical failure, not a su
 
 ## Reset, sharing, and privacy
 
-Open **Facilitator settings → Start a fresh run**. Resetting affects only the current browser. Other teams keep their own words and progress. Server restart resets every team. A browser refresh preserves progress while its cookie and server session remain valid, but clears the visible conversation.
+Open **Facilitator settings → Start a fresh run**. Resetting affects only the current browser. Other teams keep their own words and progress. Server restart resets every team. A browser refresh preserves progress while its cookie and server session remain valid, but clears the visible answer.
 
 Use the same hostname throughout a run: `localhost`, `127.0.0.1`, and the LAN IP have different browser cookie scopes. A phone’s `localhost` means the phone, not the facilitator’s laptop. Share the laptop’s LAN IP when using the deliberate LAN mode.
 
@@ -46,4 +46,4 @@ Before outreach, take a few screenshots of successful and blocked attempts. That
 
 ## Fidelity
 
-The seven-level architecture follows the original published mechanic. Text, word selection, visual design, judge instructions, and implementation are new. The original evolving eighth level is deliberately not presented as recovered. The app does not claim identical responses or a fixed probability of success.
+The seven-level architecture follows the original published mechanic. Word selection, judge instructions, and backend implementation are new. The player layout follows the original, and the wizard images are recovered Lakera artwork; the historical frontend is preserved separately. The original evolving eighth level is deliberately not presented as recovered. The app does not claim identical responses or a fixed probability of success.

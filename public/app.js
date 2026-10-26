@@ -1,6 +1,7 @@
 const $ = id => document.getElementById(id);
 let state, level = 1, busy = false, online = false, resetModel = null;
 const conversations = new Map();
+let artwork = {};
 
 async function api(path, data) {
   const response = await fetch(`/api/${path}`, data === undefined ? {} : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
@@ -15,7 +16,7 @@ function setBusy(value) {
   $('prompt').disabled = value || !online;
   $('guess').disabled = value || !online;
   $('busy-note').hidden = !value;
-  $('ask').textContent = value ? 'Reading…' : 'Ask the wizard ↗';
+  $('ask').textContent = value ? 'Thinking…' : 'Send';
   document.querySelectorAll('.level-nav button').forEach(button => { button.disabled = value || Number(button.dataset.level) > (state?.unlocked || 0); });
 }
 function addMessage(role, text, blocked = false) {
@@ -25,25 +26,23 @@ function addMessage(role, text, blocked = false) {
 }
 function renderConversation() {
   const container = $('conversation'); container.replaceChildren();
-  const messages = conversations.get(level) || [];
-  if (!messages.length) {
-    const p = document.createElement('div'); p.className = 'message';
-    const title = document.createElement('span'); title.className = 'speaker'; title.textContent = 'THE WIZARD';
-    const text = document.createElement('span'); text.textContent = state?.levels[level - 1].description || 'Start Ollama to meet the wizard.';
-    p.append(title, text); container.append(p);
-  }
-  for (const message of messages) {
-    const block = document.createElement('div'); block.className = `message ${message.role === 'player' ? 'player' : ''} ${message.blocked ? 'blocked' : ''}`;
-    const label = document.createElement('span'); label.className = 'speaker'; label.textContent = message.role === 'player' ? 'YOU' : message.blocked ? 'A DEFENSE STEPPED IN' : 'THE WIZARD';
-    const text = document.createElement('span'); text.textContent = message.text;
-    block.append(label, text); container.append(block);
-  }
-  container.scrollTop = container.scrollHeight;
+  const latest = (conversations.get(level) || []).filter(message => message.role === 'wizard').at(-1);
+  container.hidden = !latest;
+  $('guess-section').hidden = !latest && !state?.completed.includes(level);
+  if (!latest) return;
+  const block = document.createElement('div');
+  block.className = `message ${latest.blocked ? 'blocked' : ''}`;
+  block.textContent = latest.text;
+  container.append(block);
 }
+
 function render() {
   if (!state) return;
   const current = state.levels[level - 1];
-  $('level-label').textContent = `THE PASSWORD GAME · LEVEL ${String(level).padStart(2, '0')} / 07`;
+  $('level-label').textContent = `(LVL ${level})`;
+  $('passed-count').textContent = `${state.completed.length} / 7`;
+  $('wizard-art').src = artwork[String(level)] || '/wizard.svg';
+  $('wizard-art').alt = `Gandalf at level ${level}`;
   $('level-title').textContent = current.title;
   $('level-description').textContent = current.description;
   $('defense').textContent = current.defense;
@@ -75,6 +74,7 @@ function chooseLevel(value) {
 async function connect() {
   showError();
   try {
+    if (!Object.keys(artwork).length) { const assets = await fetch('/artwork/manifest.json'); if (assets.ok) artwork = await assets.json(); }
     const health = await api('health'); online = health.connected && health.models.length > 0;
     $('connection').classList.toggle('offline', !online);
     $('connection').replaceChildren(); const dot = document.createElement('i'); $('connection').append(dot, document.createTextNode(online ? 'Ollama connected' : 'Ollama needs attention'));
@@ -93,10 +93,10 @@ async function connect() {
 $('prompt-form').addEventListener('submit', async event => {
   event.preventDefault(); if (busy || !state || !online) return;
   const prompt = $('prompt').value.trim(); if (!prompt) return;
-  showError(); setBusy(true); addMessage('player', prompt);
+  showError(); setBusy(true); conversations.set(level, []); addMessage('player', prompt);
   try {
     const response = await api('attack', { level, prompt }); state = response.state;
-    addMessage('wizard', response.answer, response.blocked); $('prompt').value = '';
+    addMessage('wizard', response.answer, response.blocked);
   } catch (error) { showError(error.message); }
   finally { setBusy(false); render(); $('prompt').focus(); }
 });

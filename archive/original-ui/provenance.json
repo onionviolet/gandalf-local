@@ -1,0 +1,100 @@
+[
+  {
+    "file": "public/artwork/original/baseline.jpg",
+    "original_url": "https://gandalf.lakera.ai/level-images/baseline.jpg",
+    "archive_url": "https://web.archive.org/web/20230906154423id_/https://gandalf.lakera.ai/level-images/baseline.jpg",
+    "requested_capture": "20230906154423",
+    "retrieved_on": "2026-10-26",
+    "bytes": 137711,
+    "sha256": "66fb8bf5706a64beab5745ed60a9b3bad9a6143173075bbf60e7702766404dad"
+  },
+  {
+    "file": "public/artwork/original/do-not-tell-and-block.jpg",
+    "original_url": "https://gandalf.lakera.ai/level-images/do-not-tell-and-block.jpg",
+    "archive_url": "https://web.archive.org/web/20240725051320id_/https://gandalf.lakera.ai/level-images/do-not-tell-and-block.jpg",
+    "requested_capture": "20240725051320",
+    "retrieved_on": "2026-10-26",
+    "bytes": 136174,
+    "sha256": "21f81a8331df09cbbaa1969066335db18f09d67a6f6c264092b5773f2ce02d10"
+  },
+  {
+    "file": "public/artwork/original/do-not-tell.jpg",
+    "original_url": "https://gandalf.lakera.ai/level-images/do-not-tell.jpg",
+    "archive_url": "https://web.archive.org/web/20240725051255id_/https://gandalf.lakera.ai/level-images/do-not-tell.jpg",
+    "requested_capture": "20240725051255",
+    "retrieved_on": "2026-10-26",
+    "bytes": 116832,
+    "sha256": "06dccb2e9503222aa97fd4ad28c11ded9eb6dc2ec88ce4977dfbc61a9e5fc1b4"
+  },
+  {
+    "file": "public/artwork/original/gandalf-the-white.jpg",
+    "original_url": "https://gandalf.lakera.ai/level-images/gandalf-the-white.jpg",
+    "archive_url": "https://web.archive.org/web/20240818021420id_/https://gandalf.lakera.ai/level-images/gandalf-the-white.jpg",
+    "requested_capture": "20240818021420",
+    "retrieved_on": "2026-10-26",
+    "bytes": 160791,
+    "sha256": "7f8f19928a966491f6793333a8033afd5e604050ef4bda67ee142ed00709a47e"
+  },
+  {
+    "file": "public/artwork/original/gandalf.jpg",
+    "original_url": "https://gandalf.lakera.ai/level-images/gandalf.jpg",
+    "archive_url": "https://web.archive.org/web/20240811165157id_/https://gandalf.lakera.ai/level-images/gandalf.jpg",
+    "requested_capture": "20240811165157",
+    "retrieved_on": "2026-10-26",
+    "bytes": 134743,
+    "sha256": "194226407a237e2ff083db390474c271c439c7c2c373b2b0bb2648e4046bd8ab"
+  },
+  {
+    "file": "public/artwork/original/gpt-blacklist.jpg",
+    "original_url": "https://gandalf.lakera.ai/level-images/gpt-blacklist.jpg",
+    "archive_url": "https://web.archive.org/web/20240423015142id_/https://gandalf.lakera.ai/level-images/gpt-blacklist.jpg",
+    "requested_capture": "20240423015142",
+    "retrieved_on": "2026-10-26",
+    "bytes": 167492,
+    "sha256": "f413a990946b7b5cad73ce1c4e37afe214516c12b9c647733189710b7ab51b33"
+  },
+  {
+    "file": "public/artwork/original/gpt-is-password-encoded.jpg",
+    "original_url": "https://gandalf.lakera.ai/level-images/gpt-is-password-encoded.jpg",
+    "archive_url": "https://web.archive.org/web/20240818020952id_/https://gandalf.lakera.ai/level-images/gpt-is-password-encoded.jpg",
+    "requested_capture": "20240818020952",
+    "retrieved_on": "2026-10-26",
+    "bytes": 127945,
+    "sha256": "eac220aa5465d0406e06ecd6762bbc8319ca31af36fb687cc5c309161bc8a66c"
+  },
+  {
+    "file": "public/artwork/original/word-blacklist.jpg",
+    "original_url": "https://gandalf.lakera.ai/level-images/word-blacklist.jpg",
+    "archive_url": "https://web.archive.org/web/20240411075541id_/https://gandalf.lakera.ai/level-images/word-blacklist.jpg",
+    "requested_capture": "20240411075541",
+    "retrieved_on": "2026-10-26",
+    "bytes": 136746,
+    "sha256": "9182dda4a5dc0151100592ed70f95c48c7efb2bac7359a4b0b21f9584daac268"
+  },
+  {
+    "file": "archive/original-ui/index-c4c036b3.js",
+    "original_url": "https://gandalf.lakera.ai/assets/index-c4c036b3.js",
+    "archive_url": "https://web.archive.org/web/20240108122246id_/https://gandalf.lakera.ai/assets/index-c4c036b3.js",
+    "requested_capture": "20240108122246",
+    "retrieved_on": "2026-10-26",
+    "bytes": 302236,
+    "sha256": "43b7f0c4d886ce24b2432a1a99678742f7307638c8451dbac93c8631a3c881f6"
+  },
+  {
+    "file": "archive/original-ui/index-6cb748cb.css",
+    "original_url": "https://gandalf.lakera.ai/assets/index-6cb748cb.css",
+    "archive_url": "https://web.archive.org/web/20240108122246id_/https://gandalf.lakera.ai/assets/index-6cb748cb.css",
+    "requested_capture": "20240108122246",
+    "retrieved_on": "2026-10-26",
+    "bytes": 47499,
+    "sha256": "6cb748cb2f8018ab495d081b6f4181c08c89a957abc7c2e202e4c25ce12a6895"
+  },
+  {
+    "file": "archive/original-ui/index.html",
+    "original_url": "https://gandalf.lakera.ai/",
+    "archive_url": "https://web.archive.org/web/20240108122246id_/https://gandalf.lakera.ai/",
+    "retrieved_on": "2026-10-26",
+    "bytes": 3182,
+    "sha256": "f7036b3c3599c6c2613e16fd85415ea4419e6e944fcfe8dae603b41248c9c242"
+  }
+]
