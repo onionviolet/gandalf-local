@@ -10,7 +10,7 @@ This is an unofficial local recreation of Lakera’s original Gandalf, for learn
 | `docs/screenshot.png` | Screenshot of the local UI containing the recovered original artwork | Includes third-party artwork excluded from the MIT grant |
 | `public/artwork/original/*.jpg` | Eight original Lakera Gandalf wizard images, via Internet Archive | Third-party artwork; not covered by this repository’s MIT license |
 
-Source URLs, capture dates, and checksums are recorded in [the provenance manifest](archive/original-ui/provenance.json). A publicly available archived file is not evidence of an open license. Permission from Lakera to redistribute these materials has not been established. 
+Source URLs, capture dates, and checksums are recorded in [the provenance manifest](archive/original-ui/provenance.json). A publicly available archived file is not evidence of an open license. Permission from Lakera to redistribute these materials has not been established.
 
 The local frontend uses an independently written adaptation of the original single-column layout. It does not run the archived application or its analytics. `public/wizard.svg` is our earlier original illustration and remains MIT licensed, as does the new app code.
 

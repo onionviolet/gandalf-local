@@ -1,0 +1,2 @@
+# Keep recovered source byte-for-byte, including historical whitespace.
+archive/original-ui/index* -whitespace
